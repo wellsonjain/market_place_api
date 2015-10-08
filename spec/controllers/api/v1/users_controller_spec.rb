@@ -4,6 +4,7 @@ describe Api::V1::UsersController do
   before(:each) { request.headers['Accept'] = "application/vnd.marketplace.v1" }
 
   describe "GET #show" do
+
     before(:each) do
       @user = FactoryGirl.create :user
       get :show, id: @user.id, format: :json
@@ -47,6 +48,43 @@ describe Api::V1::UsersController do
       it "render the json error on why the user can not be created" do
         user_response = JSON.parse(response.body, symbolize_names:true)
         expect(user_response[:errors][:email]).to include "can't be blank"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
+
+  describe "PUT/PATCH #update" do
+
+    context "when is successfully updated" do
+      before(:each) do
+        @user = FactoryGirl.create :user
+        patch :update, { id: @user.id, user: { email: "newexample@domain.com" } }, format: :json
+      end
+
+      it "renders the json representation for the user record just created" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:email]).to eql "newexample@domain.com"
+      end
+
+      it { should respond_with 200 }
+    end
+
+    context "when is not updated" do
+      before(:each) do
+        @user = FactoryGirl.create :user
+        patch :update, { id: @user.id,
+                         user: { email: "bademail.com" } }, format: :json
+      end
+
+      it "renders an errors json" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response).to have_key(:errors)
+      end
+
+      it "renders the json errors on whye the user could not be created" do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:errors][:email]).to include "is invalid"
       end
 
       it { should respond_with 422 }

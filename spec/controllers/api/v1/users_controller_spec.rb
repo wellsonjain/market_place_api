@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Api::V1::UsersController do
-  before(:each) { request.headers['Accept'] = "application/vnd.marketplace.v1" }
-
   describe "GET #show" do
 
     before(:each) do
@@ -41,12 +39,12 @@ describe Api::V1::UsersController do
       end
 
       it "renders an error json" do
-        user_response = JSON.parse(response.body, symbolize_names:true)
+        user_response = json_response
         expect(user_response).to have_key(:errors)
       end
 
       it "render the json error on why the user can not be created" do
-        user_response = JSON.parse(response.body, symbolize_names:true)
+        user_response = json_response
         expect(user_response[:errors][:email]).to include "can't be blank"
       end
 

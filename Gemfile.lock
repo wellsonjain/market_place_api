@@ -7,6 +7,14 @@ GIT
       activemodel (~> 4.0)
       httparty (~> 0.13)
 
+GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: 73cf275d104f62b32eb80b4e72577bd56ebdd730
+  ref: 73cf275
+  specs:
+    shoulda-matchers (3.0.0.rc1)
+      activesupport (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -184,8 +192,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    shoulda-matchers (3.0.0)
-      activesupport (>= 4.0.0)
     simple_form (3.2.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -235,7 +241,7 @@ DEPENDENCIES
   sabisu_rails!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  shoulda-matchers
+  shoulda-matchers!
   simple_form
   spring
   sqlite3

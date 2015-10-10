@@ -59,5 +59,5 @@ group :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem 'ffaker'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github:"thoughtbot/shoulda-matchers", :ref => '73cf275'
 end

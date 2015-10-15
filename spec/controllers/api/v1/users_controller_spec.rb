@@ -57,7 +57,7 @@ describe Api::V1::UsersController do
     context "when is successfully updated" do
       before(:each) do
         @user = FactoryGirl.create :user
-        patch :update, { id: @user.id, user: { email: "newexample@domain.com" } }, format: :json
+        request.headers['Authorization'] = @user.auth_token
       end
 
       it "renders the json representation for the user record just created" do

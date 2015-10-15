@@ -42,6 +42,7 @@ gem 'simple_form'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry'
 end
 
 group :development do
@@ -57,6 +58,7 @@ end
 
 group :test do
   gem "rspec-rails"
+  gem "rspec-collection_matchers"
   gem "factory_girl_rails"
   gem 'ffaker'
   gem 'shoulda-matchers', github:"thoughtbot/shoulda-matchers", :ref => '73cf275'

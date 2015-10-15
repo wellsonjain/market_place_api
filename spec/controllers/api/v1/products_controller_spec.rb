@@ -23,7 +23,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
     it "returns 4 records from the database" do
       product_response = json_response
-      expect(product_response[:products]).to have(4).items
+      expect(product_response[:products]).to have_at_least(4).items
     end
 
     it { should respond_with 200 }
@@ -33,14 +33,14 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     context "when is successfully created" do
       before(:each) do
         user = FactoryGirl.create :user
-        @product_attribute = FactoryGirl.attributes_for :product
+        @product_attributes = FactoryGirl.attributes_for :product
         api_authorization_header user.auth_token
-        post :create, { user_id: user.id, product: @product_attribute }
+        post :create, { user_id: user.id, product: @product_attributes }
       end
 
       it "renders the json representation for the product record just created" do
         product_response = json_response
-        expect(product_response[:title]).to eql @product_attribute[:title]
+        expect(product_response[:title]).to eql @product_attributes[:title]
       end
 
       it { should respond_with 201 }
@@ -51,12 +51,12 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
         user = FactoryGirl.create :user
         @invalid_product_attribute = { title: "Smart TV", price: "Twelve dollars" }
         api_authorization_header user.auth_token
-        post create, { user_id: user.id, product: @invalid_product_attribute}
+        post :create, { user_id: user.id, product: @invalid_product_attribute }
       end
 
-      it "render the json error on why the product could not be created" do
+      it "renders the json errors on whye the user could not be created" do
         product_response = json_response
-        expect(product_response[:error][:price]).to include "is not a number"
+        expect(product_response[:errors][:price]).to include "is not a number"
       end
 
       it { should respond_with 422 }

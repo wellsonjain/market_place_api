@@ -57,9 +57,10 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails"
-  gem "rspec-collection_matchers"
-  gem "factory_girl_rails"
+  gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
+  gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'email_spec'
   gem 'shoulda-matchers', github:"thoughtbot/shoulda-matchers", :ref => '73cf275'
 end

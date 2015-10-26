@@ -8,6 +8,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'devise'
+require 'email_spec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -56,6 +57,8 @@ RSpec.configure do |config|
   config.include Request::JsonHelpers, type: :controller
   config.include Request::HeadersHelpers, type: :controller
   config.include Devise::TestHelpers, :type => :controller
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
 
   config.before(:each, type: :controller) do
     include_default_accept_headers

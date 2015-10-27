@@ -32,7 +32,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
       it "returns 4 records from the database" do
         products_response = json_response
-        expect(products_response[:products]).to have_at_least(4).items
+        expect(products_response[:products]).to have(4).items
       end
 
       it "returns the user object into each product" do
@@ -41,6 +41,12 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
           expect(product_response[:user]).to be_present
         end
       end
+
+      it { expect(json_response).to have_key(:meta) }
+      it { expect(json_response[:meta]).to have_key(:pagination) }
+      it { expect(json_response[:meta][:pagination]).to have_key(:per_page) }
+      it { expect(json_response[:meta][:pagination]).to have_key(:total_pages) }
+      it { expect(json_response[:meta][:pagination]).to have_key(:total_objects) }
 
       it { should respond_with 200 }
     end

@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'kaminari'
+gem 'delayed_job_active_record'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
